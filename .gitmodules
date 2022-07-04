@@ -1,0 +1,12 @@
+[submodule "riscv-gnu-toolchain"]
+	path = riscv-gnu-toolchain
+	url = ./riscv-gnu-toolchain/
+[submodule "riscv-pk"]
+	path = riscv-pk
+	url = ./riscv-pk/
+[submodule "riscv-isa-sim"]
+	path = riscv-isa-sim
+	url = ./riscv-isa-sim/
+[submodule "riscv-llvm"]
+	path = riscv-llvm
+	url = ./riscv-llvm/
