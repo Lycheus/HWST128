@@ -8,8 +8,8 @@ Please refer to the DAC 2021 paper (link: https://ieeexplore.ieee.org/abstract/d
 The project is using the RISC-V LLVM compiler to instrument memory safety operations into programs.
 The tools include: 
   1) **GNU linux toolchain** for libraries; 
-  2) **LLVM compiler (clang)** with SHORE instrumentation;
-  3) **RISC-V ISA simulator (SPIKE)** with SHORE ISA extention;
+  2) **LLVM compiler (clang)** with HWST128 instrumentation;
+  3) **RISC-V ISA simulator (SPIKE)** with HWST128 ISA extention;
   4) **Proxy kernel (PK)** with shadow space allocation
 
 The following script is supported and verified on Ubuntu 20.04 LTS.
@@ -29,14 +29,14 @@ sudo apt-get -y install \
   libglib2.0-dev libfdt-dev libpixman-1-dev device-tree-compiler
 ```
 
-Clone the SHORE github
+Clone the HWST github
 ```
-git clone --recursive https://github.com/Lycheus/SHORE.git
+git clone --recursive https://github.com/Lycheus/HWST128.git
 ```
 
 Next is to build the tools (it is a very lengthy process, prepare your coffee and cookie =))
 ```
-cd SHORE
+cd HWST128
 mkdir _install
 export PATH=`pwd`/_install/bin:$PATH
 export RISCV=`pwd`/_install/
@@ -49,7 +49,7 @@ make linux -j`nproc`
 popd
 
 #LLVM
-pushd shore-llvm
+pushd hwst-llvm
 mkdir _build
 cd _build
 cmake -G Ninja -DCMAKE_BUILD_TYPE="Release" \
@@ -63,13 +63,13 @@ cmake -G Ninja -DCMAKE_BUILD_TYPE="Release" \
   ../llvm
 cmake --build . --target install
 
-#build SBCETS runtime with SHORE instrumentation
+#build SBCETS runtime with HWST instrumentation
 cd ../runtime
 make
 popd
 
 # build spike (RISC-V ISA simulator)
-pushd shore-isa-sim
+pushd hwst-isa-sim
 mkdir build
 cd build
 ../configure --prefix=$RISCV --with-fesvr=$RISCV --enable-histogram
@@ -78,7 +78,7 @@ make install
 popd
 
 #build pk (proxy kernel)
-pushd shore-pk
+pushd hwst-pk
 mkdir build
 cd build
 ../configure --prefix=$RISCV --host=riscv64-unknown-linux-gnu
@@ -102,13 +102,13 @@ int main(){
 END
 
 clang -fsoftboundcets -c hello.c
-riscv64-unknown-linux-gnu-gcc hello.o -o hello -L $RISCV/../shore-llvm/runtime -lsoftboundcets_rt -lm -lrt -static -march=rv64imac -mabi=lp64 
+riscv64-unknown-linux-gnu-gcc hello.o -o hello -L $RISCV/../hwst-llvm/runtime -lsoftboundcets_rt -lm -lrt -static -march=rv64imac -mabi=lp64 
 spike pk hello
 ```
 
 Or a slightly more complex program with differnt pointer manipulations
 ```
-cd <shore>/example
+cd <hwst>/example
 ./run.sh
 ```
 
@@ -119,28 +119,14 @@ https://github.com/wmpmiles/rocket-chip
 
 ## Tips & Tricks
 
-### Switch to SHORE-ESS (eliminate shadow stack)
-In ```<shore>/shore-llvm``` subfolder, you can switch to ESS branch by using following commands
-```
-git checkout SHORE-ess
-```
-Remember to rebuild the LLVM compiler and runtime.
-```
-cd build
-cmake --build . --target install
-cd ../runtime
-make clean
-make
-```
-
-### For shore-pk:
+### For hwst-pk:
 Be careful the default installation directory of pk is "unknown-linux-gnu" instead "_install", what make it worse is that the default pk used by spike is targeting "unknown-elf" directory instead "_install".
 You can use absolute path for pk to solve this problem. 
 ```
-e.g. "spike pk binaries" -> "spike ~/<shore>/_install/pk binaries"
+e.g. "spike pk binaries" -> "spike ~/<hwst>/_install/pk binaries"
 ```
 
 ### Paper Citation
 ```
-H. -K. Dow, T. Li, W. Miles and S. Parameswaran, "SHORE: Hardware/Software Method for Memory Safety Acceleration on RISC-V," 2021 58th ACM/IEEE Design Automation Conference (DAC), 2021, pp. 289-294, doi: 10.1109/DAC18074.2021.9586293.
+Wait until DAC 2022
 ```
