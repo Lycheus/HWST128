@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.1 (64-bit)
+# SW Build 1846317 on Fri Apr 14 18:54:47 MDT 2017
+# IP Build 1846188 on Fri Apr 14 20:52:08 MDT 2017
+# Start of session at: Wed May 18 16:01:06 2022
+# Process ID: 2255
+# Current directory: /home/lycheus/rc-fpga-zcu/zcu102/zcu102_rocketchip_ZynqConfig/zcu102_rocketchip_ZynqConfig.runs/synth_1
+# Command line: vivado -log rocketchip_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source rocketchip_wrapper.tcl
+# Log file: /home/lycheus/rc-fpga-zcu/zcu102/zcu102_rocketchip_ZynqConfig/zcu102_rocketchip_ZynqConfig.runs/synth_1/rocketchip_wrapper.vds
+# Journal file: /home/lycheus/rc-fpga-zcu/zcu102/zcu102_rocketchip_ZynqConfig/zcu102_rocketchip_ZynqConfig.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source rocketchip_wrapper.tcl -notrace

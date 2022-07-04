@@ -114,8 +114,11 @@ cd <hwst>/example
 
 The hardware instrumentation is integrate with the softbound pointer analysis, therefore "-fsoftobundcets" will insert the HW accelerated security operations for metadata management.
 
-The FPGA-ready rocketchip with memory safety ISA extension is avaliable in following Github:
+The FPGA-ready rocketchip with memory safety ISA extension is avaliable in hwst-fpga folder.
+Open the AMD Xilinx Vivado project file to synthesis to target FPGA. (Our team uses Zynq ZCU102)
+Detailed instruction can be found in following link:
 https://github.com/wmpmiles/rocket-chip
+
 
 ## Tips & Tricks
 
