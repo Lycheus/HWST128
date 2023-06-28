@@ -131,5 +131,7 @@ e.g. "spike pk binaries" -> "spike ~/<hwst>/_install/pk binaries"
 
 ### Paper Citation
 ```
-Wait until DAC 2022
+https://dl.acm.org/doi/abs/10.1145/3489517.3530548
+
+Dow, Hsu-Kang, Tuo Li, and Sri Parameswaran. "HWST128: complete memory safety accelerator on RISC-V with metadata compression." Proceedings of the 59th ACM/IEEE Design Automation Conference. 2022.
 ```
